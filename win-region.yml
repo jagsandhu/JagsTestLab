@@ -5,4 +5,4 @@
     - name: Set Region
       community.windows.win_region:
         format: en-GB
-          copy_settings: yes
+        copy_settings: yes
