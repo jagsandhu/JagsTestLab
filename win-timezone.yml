@@ -1,4 +1,7 @@
 ---
 - name: Set GMT
-  win_timezone:
-    timezone: GMT Standard Time
+  hosts: all
+  tasks:
+    - name: Set Timezone
+      win_timezone:
+        timezone: GMT Standard Time
