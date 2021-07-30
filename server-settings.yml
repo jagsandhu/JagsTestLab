@@ -1,5 +1,7 @@
 ---
-- name: Set timezone to 'GMT Standard Time' (GMT)
+- name: " Windows TimeZone"
   hosts: all
-  win_timezone:
-    timezone: GMT Standard Time
+  tasks:
+    - name: "Set the TimeZone"
+      win_timezone:
+         timezone: "GMT Standard Time" 
