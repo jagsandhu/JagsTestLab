@@ -6,3 +6,5 @@
       win_region:
         format: en-GB
         copy_settings: True
+        unicode_language: en-GB
+        register: result
