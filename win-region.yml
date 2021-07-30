@@ -1,0 +1,7 @@
+- name: " Windows Region"
+  hosts: all
+    tasks:
+    - name: "Set the Region"
+      community.windows.win_region:
+        format: en-GB
+        copy_settings: yes
