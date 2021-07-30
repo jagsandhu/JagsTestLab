@@ -1,8 +1,10 @@
 ---
-- name: "Install notepadplusplus version 6.6"
+- name: "Install Multiple Packages"
   hosts: all
   tasks:
-    - name: Install chocolatey
       win_chocolatey:
-          name: notepadplusplus
-          version: '6.6'
+        name:
+        - notepadplusplus
+        - putty
+        - microsoft-edge
+      state: present
