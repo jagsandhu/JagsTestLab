@@ -1,10 +1,9 @@
----
-- name: "Install Multiple Packages"
+- name: Install multiple packages
   hosts: all
-  tasks:
-      win_chocolatey:
-        name:
-        - notepadplusplus
-        - putty
-        - microsoft-edge
-        state: present
+  win_chocolatey:
+    name: '{{ item }}'
+    state: present
+  with_items:
+  - notepadplusplus
+  - putty
+  - microsoft-edge
