@@ -7,4 +7,4 @@
         - notepadplusplus
         - putty
         - microsoft-edge
-      state: present
+        state: present
