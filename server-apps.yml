@@ -1,11 +1,10 @@
 ---
-- name: "Apps"
-  hosts: all
-  tasks:
-    win_chocolatey:
-      name: '{{ item }}'
-      state: present 
-    with_items:
-    - notepadplusplus
-    - putty
-    - microsoft-edge  
+ hosts: all
+ tasks:
+   win_chocolatey:
+     name: '{{ item }}'
+     state: present 
+   with_items:
+   - notepadplusplus
+   - putty
+   - microsoft-edge  
