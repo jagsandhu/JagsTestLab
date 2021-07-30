@@ -1,5 +1,5 @@
 ---
-- name: Set timezone to 'GMT Standard Time' (GMT)
+- name: Set GMT
   hosts: all
   tasks:
     - name: Set Timezone
