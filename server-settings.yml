@@ -1,14 +1,15 @@
 ---
 - name: " Windows TimeZone"
   hosts: all
-  tasks:
+    tasks:
     - name: "Set the TimeZone"
       win_timezone:
          timezone: "GMT Standard Time" 
-         
-- name: " Set the region format to English GB"
+
+- name: " Windows TimeZone"
   hosts: all
-  tasks:
+    tasks:
     - name: "Set the Region"
       community.windows.win_region:
         format: en-GB
+        copy_settings: yes 
