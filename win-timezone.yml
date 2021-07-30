@@ -1,5 +1,4 @@
 ---
 - name: Set GMT
-  hosts: all
-    community.windows.win_timezone:
+  win_timezone:
     timezone: GMT Standard Time
