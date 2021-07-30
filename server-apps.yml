@@ -5,4 +5,4 @@
     - name: Install chocolatey
       win_chocolatey:
           name: notepadplusplus
-           version: '6.6'
+          version: '6.6'
