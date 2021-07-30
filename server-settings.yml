@@ -2,9 +2,4 @@
 - name: Set timezone to 'GMT Standard Time' (GMT)
   hosts: all
   win_timezone:
-    timezone: GMT Standard Time    
-    
-- name: Set the region format to English GB
-  community.windows.win_region:
-    format: en-GB
-    copy_settings: yes
+    timezone: GMT Standard Time
