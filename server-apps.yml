@@ -1,4 +1,5 @@
-- name: Install multiple packages
+---
+- name: "Install multiple packages"
   hosts: all
   win_chocolatey:
     name: '{{ item }}'
