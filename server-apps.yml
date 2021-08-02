@@ -8,4 +8,5 @@
     with_items:
     - notepadplusplus
     - putty
-    - microsoft-edge  
+    - microsoft-edge
+    - microsoft-monitoring-agent
