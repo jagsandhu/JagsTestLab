@@ -1,0 +1,129 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "frontdoors_powerappstest_name": {
+            "defaultValue": "powerappstest",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Network/frontdoors",
+            "apiVersion": "2020-05-01",
+            "name": "[parameters('frontdoors_powerappstest_name')]",
+            "location": "Global",
+            "properties": {
+                "routingRules": [
+                    {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontdoors_powerappstest_name')), '/RoutingRules/route')]",
+                        "name": "route",
+                        "properties": {
+                            "routeConfiguration": {
+                                "forwardingProtocol": "HttpsOnly",
+                                "backendPool": {
+                                    "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontdoors_powerappstest_name')), '/backendPools/jagslabtestblue')]"
+                                },
+                                "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorForwardingConfiguration"
+                            },
+                            "resourceState": "Enabled",
+                            "frontendEndpoints": [
+                                {
+                                    "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontdoors_powerappstest_name')), concat('/FrontendEndpoints/', parameters('frontdoors_powerappstest_name'), '-azurefd-net'))]"
+                                }
+                            ],
+                            "acceptedProtocols": [
+                                "Https"
+                            ],
+                            "patternsToMatch": [
+                                "/*"
+                            ],
+                            "enabledState": "Disabled"
+                        }
+                    }
+                ],
+                "resourceState": "Enabled",
+                "loadBalancingSettings": [
+                    {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontdoors_powerappstest_name')), '/LoadBalancingSettings/loadBalancingSettings-1630519923604')]",
+                        "name": "loadBalancingSettings-1630519923604",
+                        "properties": {
+                            "resourceState": "Enabled",
+                            "sampleSize": 4,
+                            "successfulSamplesRequired": 2,
+                            "additionalLatencyMilliseconds": 0
+                        }
+                    }
+                ],
+                "healthProbeSettings": [
+                    {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontdoors_powerappstest_name')), '/HealthProbeSettings/healthProbeSettings-1630519923604')]",
+                        "name": "healthProbeSettings-1630519923604",
+                        "properties": {
+                            "resourceState": "Enabled",
+                            "path": "/",
+                            "protocol": "Https",
+                            "intervalInSeconds": 30,
+                            "enabledState": "Enabled",
+                            "healthProbeMethod": "Head"
+                        }
+                    }
+                ],
+                "backendPools": [
+                    {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontdoors_powerappstest_name')), '/BackendPools/jagslabtestblue')]",
+                        "name": "jagslabtestblue",
+                        "properties": {
+                            "backends": [
+                                {
+                                    "address": "jagslabtestblue.powerappsportals.com",
+                                    "httpPort": 80,
+                                    "httpsPort": 443,
+                                    "priority": 2,
+                                    "weight": 50,
+                                    "backendHostHeader": "jagslabtestblue.powerappsportals.com",
+                                    "enabledState": "Enabled"
+                                },
+                                {
+                                    "address": "jagslabtestgreen.powerappsportals.com",
+                                    "httpPort": 80,
+                                    "httpsPort": 443,
+                                    "priority": 1,
+                                    "weight": 50,
+                                    "backendHostHeader": "jagslabtestgreen.powerappsportals.com",
+                                    "enabledState": "Enabled"
+                                }
+                            ],
+                            "resourceState": "Enabled",
+                            "loadBalancingSettings": {
+                                "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontdoors_powerappstest_name')), '/LoadBalancingSettings/loadBalancingSettings-1630519923604')]"
+                            },
+                            "healthProbeSettings": {
+                                "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontdoors_powerappstest_name')), '/HealthProbeSettings/healthProbeSettings-1630519923604')]"
+                            }
+                        }
+                    }
+                ],
+                "frontendEndpoints": [
+                    {
+                        "id": "[concat(resourceId('Microsoft.Network/frontdoors', parameters('frontdoors_powerappstest_name')), concat('/FrontendEndpoints/', parameters('frontdoors_powerappstest_name'), '-azurefd-net'))]",
+                        "name": "[concat(parameters('frontdoors_powerappstest_name'), '-azurefd-net')]",
+                        "properties": {
+                            "resourceState": "Enabled",
+                            "hostName": "[concat(parameters('frontdoors_powerappstest_name'), '.azurefd.net')]",
+                            "sessionAffinityEnabledState": "Disabled",
+                            "sessionAffinityTtlSeconds": 0
+                        }
+                    }
+                ],
+                "backendPoolsSettings": {
+                    "enforceCertificateNameCheck": "Enabled",
+                    "sendRecvTimeoutSeconds": 30
+                },
+                "enabledState": "Enabled",
+                "friendlyName": "[parameters('frontdoors_powerappstest_name')]"
+            }
+        }
+    ]
+}
